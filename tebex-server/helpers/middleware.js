@@ -8,11 +8,11 @@ const Authentication = (req, res, next) => {
   const token =
     bearerToken && bearerToken.split(' ')[1] ? bearerToken.split(' ')[1] : undefined
   if(!token){
-    return next(boom.forbidden('Token required'))
+    return next(boom.forbidden('Token required').output.payload)
   }
   jwt.verify(token, process.env.secretJwt, (err, decoded) => {
     if (err) {
-      next(boom.forbidden('Invalid token'))
+      next(boom.forbidden('Invalid token').output.payload)
     } else {
       req.decoded = decoded
       req.id = decoded.id
@@ -21,7 +21,15 @@ const Authentication = (req, res, next) => {
   })
 }
 
+const isSelf = (req, res, next) => {
+  if (req.decoded.userId == req.params.id) {
+    next()
+  } else {
+    next(boom.unauthorized('User not allowed').output.payload)
+  }
+}
+
 module.exports = {
-  Authentication
-  
+  Authentication,
+  isSelf
 };
