@@ -28,8 +28,6 @@ const tebexUpdateMiddleware = (req, res, next) => {
   const username = req.body.username;
   const value = req.body.value;
   const hash = req.headers['x-bc-sig'];
-  console.log('username', username);
-  console.log('value', value);
   if(hash === ''){
     res.status(401).send({
       status: 1,
@@ -38,7 +36,6 @@ const tebexUpdateMiddleware = (req, res, next) => {
     return;
   }
   const newHash = SHA256(`${tebexApiKey}${username}${value}`, ).toString();
-  console.log('hash', newHash);
   if(String(newHash).toLowerCase() === String(hash).toLowerCase()){
     next();
   } else {

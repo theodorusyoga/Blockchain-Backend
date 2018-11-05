@@ -9,7 +9,29 @@ const getBalance = (req, res) => {
   });
   user.then((data) => {
     res.status(200).send({
-      balance: Number(data.dollars)
+      balance: Number(data.amount)
+    });
+  }).catch(() => {
+    res.status(500).send({
+      status: 1,
+      message: 'Invalid User ID'
+    })
+  });
+};
+
+const getBalanceWithDetails = (req, res) => {
+  const username = req.query.username;
+  const user = model.user.findOne({
+    where: {
+      uniqueId: username
+    }
+  });
+  user.then((data) => {
+    res.status(200).send({
+      userId: data.uniqueId,
+      name: data.name,
+      balance: Number(data.amount),
+      dollars: Number(data.dollars)
     });
   }).catch(() => {
     res.status(500).send({
@@ -46,5 +68,6 @@ const updateBalance = (req, res) => {
 
 module.exports = {
   getBalance,
-  updateBalance
+  updateBalance,
+  getBalanceWithDetails
 };

@@ -6,7 +6,7 @@ const boom = require('boom')
 const Authentication = (req, res, next) => {
   const bearerToken = req.headers.authorization
   const token =
-    bearerToken && bearerToken.split(' ')[1] ? bearerToken.split(' ')[1] : undefined
+    bearerToken && bearerToken.split(' ')[1] ? bearerToken.split(' ')[1] : undefined;
   if(!token){
     return next(boom.forbidden('Token required').output.payload)
   }
