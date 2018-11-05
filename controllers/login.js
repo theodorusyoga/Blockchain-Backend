@@ -6,7 +6,7 @@ var model = require('../server/models/index');
 const boom = require('boom')
 
 const loginUser = (req, res) => {
-  model.user.findOne({
+  model.admin.findOne({
     where: {
       username: req.body.username
     }
@@ -21,14 +21,15 @@ const loginUser = (req, res) => {
             exp: Math.floor(Date.now() / 1000) + (120 * 60), // 1 hour
             id: data.id
           }, process.env.secretJwt),
-          username: data.username
+          username: data.username,
+          name: data.name
         });
       } else {
         res.status(401).send(boom.unauthorized('Invalid email or password').output.payload);
       }
     });
   }).catch(() => {
-    res.status(401).send(boom.unauthorized('Invalid email or password').output.payload);
+    res.status(401).send(boom.unauthorized('Invalid username').output.payload);
   })
 }
 
