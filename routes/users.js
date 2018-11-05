@@ -13,4 +13,8 @@ router.get('/tebexbalance', tebex.tebexMiddleware, function (req, res, next) {
   balance.getBalance(req, res);
 });
 
+router.post('/tebexbalance', tebex.tebexUpdateMiddleware, function (req, res, next) {
+  balance.updateBalance(req, res);
+});
+
 module.exports = router;
