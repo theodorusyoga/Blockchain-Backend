@@ -18,6 +18,9 @@ module.exports = {
       dollars: {
         type: Sequelize.BIGINT
       },
+      amount: {
+        type: Sequelize.BIGINT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

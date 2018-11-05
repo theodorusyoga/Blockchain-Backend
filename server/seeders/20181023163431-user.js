@@ -8,6 +8,7 @@ module.exports = {
       uniqueId: '716c704a-c82e-4f51-b0f7-0d6196f33f33',
       name: 'GFA_UnDead',
       dollars: 100,
+      amount: 100,
       createdAt: new Date(),
       updatedAt: new Date()
     }, 
@@ -16,6 +17,7 @@ module.exports = {
       uniqueId: '170eca6c-3d44-48bb-ab5b-b78320b1b27a',
       name: 'JLess',
       dollars: 200,
+      amount: 200,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -24,6 +26,7 @@ module.exports = {
       uniqueId: 'a036f46a-34d1-37d4-86d6-444ee3fa4c95',
       name: 'TheSteveGaming',
       dollars: 300,
+      amount: 300,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
