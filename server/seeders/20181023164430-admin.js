@@ -4,15 +4,16 @@ const uuid = require('uuid/v1');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('users', [{
+    return queryInterface.bulkInsert('admins', [{
       id: uuid(),
       username: 'kautsar',
+      name: 'Administrator',
       password: bcrypt.hashSync('kautsar', 10),
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('users', null, {});
+    return queryInterface.bulkDelete('admins', null, {});
   }
 };

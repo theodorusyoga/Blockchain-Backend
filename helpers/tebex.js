@@ -1,6 +1,5 @@
 require('dotenv').config();
 const SHA256 = require('crypto-js/sha256');
-var CryptoJS = require('crypto-js');
 
 const tebexApiKey = process.env.TEBEX_API_KEY;
 
@@ -14,7 +13,7 @@ const tebexMiddleware = (req, res, next) => {
     });
     return;
   }
-  const newHash = SHA256(`${tebexApiKey}${username}`).toString();
+  const newHash = SHA256(`${tebexApiKey}${username}`, ).toString();
   if(String(newHash).toLowerCase() === String(hash).toLowerCase()){
     next();
   } else {
