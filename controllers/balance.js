@@ -19,6 +19,18 @@ const getBalance = (req, res) => {
   });
 };
 
+const getBalances = (req, res) => {
+  const user = model.user.findAll();
+  user.then((data) => {
+    res.status(200).json(data);
+  }).catch(() => {
+    res.status(500).send({
+      status: 1,
+      message: 'Server Error'
+    })
+  });
+};
+
 const getBalanceWithDetails = (req, res) => {
   const username = req.query.username;
   const user = model.user.findOne({
@@ -67,6 +79,7 @@ const updateBalance = (req, res) => {
 }
 
 module.exports = {
+  getBalances,
   getBalance,
   updateBalance,
   getBalanceWithDetails

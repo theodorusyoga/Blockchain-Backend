@@ -10,7 +10,11 @@ router.post('/login', function(req, res, next) {
   login.loginUser(req, res);
 });
 
-router.get('/balance', middleware.Authentication, function (req, res, next) {
+router.get('/balances', function (req, res, next) {
+  balance.getBalances(req, res);
+});
+
+router.get('/balance', function (req, res, next) {
   balance.getBalanceWithDetails(req, res);
 });
 
