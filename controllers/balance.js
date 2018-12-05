@@ -20,15 +20,35 @@ const getBalance = (req, res) => {
 };
 
 const getBalances = (req, res) => {
-  const user = model.user.findAll();
-  user.then((data) => {
-    res.status(200).json(data);
-  }).catch(() => {
-    res.status(500).send({
-      status: 1,
-      message: 'Server Error'
-    })
-  });
+  const page = req.query.page ? req.query.page : 1;
+  const limit = req.query.limit ? req.query.limit : 10;
+
+  model.user.findAndCountAll().then((data) => {
+    const pages = Math.ceil(data.count / limit);
+    const offset = limit * (page-1);
+    const user = model.user.findAll({
+      limit,
+      offset
+    });
+    user.then((result) => {
+      res.status(200).json({
+        data: result,
+        meta: {
+          page,
+          limit,
+          total_data: data.count,
+          total_pages: pages
+        }
+      });
+    }).catch(() => {
+      res.status(500).send({
+        status: 1,
+        message: 'Server Error'
+      })
+    });
+  })
+
+  
 };
 
 const getBalanceWithDetails = (req, res) => {
