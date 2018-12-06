@@ -1,0 +1,8 @@
+apps:
+  - script      : bin/www
+    name        : 'tebex-backend'
+    instances   : max
+    exec_mode   : cluster
+    watch       : false
+    out_file    : '/dev/null'
+    error_file  : '/dev/null'

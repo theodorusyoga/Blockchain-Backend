@@ -27,8 +27,8 @@ const getBalances = (req, res) => {
     const pages = Math.ceil(data.count / limit);
     const offset = limit * (page-1);
     const user = model.user.findAll({
-      limit,
-      offset
+      limit: Number(limit),
+      offset: Number(offset)
     });
     user.then((result) => {
       res.status(200).json({
